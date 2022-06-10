@@ -16,7 +16,7 @@ api_service = get_permissions_service()
 
 
 @ns.route("/<int:id>")
-class PermissionsAPI(Resource):
+class Permissions(Resource):
     @jwt_required()
     @ns.marshal_with(PDto.permission_response)
     def get(self, id: int):
@@ -44,7 +44,7 @@ class PermissionsAPI(Resource):
 
 
 @ns.route("/")
-class PermissionsAPI1(Resource):
+class Permissions2(Resource):
     @jwt_required()
     @ns.expect(PDto.permission_response)
     def post(self):

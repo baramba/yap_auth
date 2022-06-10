@@ -32,11 +32,11 @@ def upgrade():
     op.bulk_insert(
         permissions,
         [
-            {"id": 1, "name": "likeagod"},
-            {"id": 2, "name": "admin"},
-            {"id": 3, "name": "user"},
-            {"id": 4, "name": "roles"},
-            {"id": 5, "name": "permissions"},
+            {"name": "likeagod"},
+            {"name": "admin"},
+            {"name": "user"},
+            {"name": "roles"},
+            {"name": "permissions"},
         ],
     )
 
@@ -44,9 +44,9 @@ def upgrade():
     op.bulk_insert(
         roles,
         [
-            {"id": 1, "name": "superuser"},
-            {"id": 2, "name": "admin"},
-            {"id": 3, "name": "user"},
+            {"name": "superuser"},
+            {"name": "admin"},
+            {"name": "user"},
         ],
     )
     roles_permissions = Table("roles_permissions", meta)

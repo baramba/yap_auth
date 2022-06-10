@@ -26,7 +26,7 @@ api_service = get_users_service()
 
 
 @ns.route("/<int:id>")
-class UsersAPI(Resource):
+class Users(Resource):
     @jwt_required()
     @ns.marshal_with(UserDto.user_response)
     def get(
@@ -58,7 +58,7 @@ class UsersAPI(Resource):
 
 
 @ns.route("/")
-class UsersAPIOther(Resource):
+class Users2(Resource):
     @ns.deprecated
     @jwt_required()
     @ns.expect(UserDto.user_request)
@@ -72,7 +72,7 @@ class UsersAPIOther(Resource):
 
 
 @ns.route("/<int:id>/roles/")
-class UsersRolesAPI(Resource):
+class UsersRoles(Resource):
     @jwt_required()
     @ns.marshal_list_with(UserDto.role_response)
     def get(self, id: int):

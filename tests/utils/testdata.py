@@ -7,7 +7,7 @@ fake.add_provider(person)
 fake.add_provider(internet)
 fake.add_provider(misc)
 
-Faker.seed(0)
+# Faker.seed(0)
 
 
 class Testdata:
@@ -16,7 +16,7 @@ class Testdata:
         return User(
             first_name=fake.first_name(),
             last_name=fake.last_name(),
-            email=fake.free_email(),
+            email=fake.unique.email(),
             password=fake.password(),
         )
 

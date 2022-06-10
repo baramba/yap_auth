@@ -1,4 +1,4 @@
-from flask import Response, abort, request
+from flask import abort, request
 from flask_jwt_extended.view_decorators import jwt_required
 from flask_restx import Resource
 from marshmallow import ValidationError
@@ -21,7 +21,7 @@ role_service: RolesService = get_roles_service()
 
 
 @ns.route("/<int:id>")
-class RolesAPI(Resource):
+class Roles(Resource):
     @ns.marshal_with(RolesDto.role_response)
     @jwt_required()
     def get(self, id: int):
@@ -49,7 +49,7 @@ class RolesAPI(Resource):
 
 
 @ns.route("/")
-class RoleAPI1(Resource):
+class Roles2(Resource):
     @jwt_required()
     @ns.expect(RolesDto.role_response)
     def post(
@@ -64,7 +64,7 @@ class RoleAPI1(Resource):
 
 
 @ns.route("/<int:id>/permissions")
-class RolePermissionsAPI(Resource):
+class RolesPermissions(Resource):
     @jwt_required()
     @ns.expect(RolesDto.role_permissions_req)
     def post(self, id: int):
