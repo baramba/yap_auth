@@ -32,7 +32,7 @@ class Settings(BaseSettings):
     # to switch on telemetry delete ".+" from OTEL_PYTHON_FLASK_EXCLUDED_URLS
     OTEL_PYTHON_FLASK_EXCLUDED_URLS: str = Field(default="swagger, .+", env="OTEL_PYTHON_FLASK_EXCLUDED_URLS")
 
-    JAEGER_PORT: int = Field(default="6831", env="JAEGER_PORT")
+    JAEGER_PORT: int = Field(default=6831, env="JAEGER_PORT")
     JAEGER_HOST: str = Field(default="localhost", env="JAEGER_HOST")
 
     # OAuth vk settings
@@ -42,6 +42,11 @@ class Settings(BaseSettings):
     # OAuth yandex settings
     yandex_client_id: str = Field(default=None, env="YANDEX_APP_ID")
     yandex_client_secret: str = Field(default=None, env="YANDEX_APP_SECRET")
+
+    # # anti-ddos
+    DDOS_NUMBER_OF_REQUEST: int = Field(default=100, env="DDOS_NUMBER_OF_REQUEST")
+    # in seconds
+    DDOS_TIME_PERIOD: int = Field(default=59, env="DDOS_TIME_PERIOD")
 
 
 settings = Settings()

@@ -1,12 +1,18 @@
 from datetime import datetime
 
-from flask import abort
 from redis import Redis
 
 from app import redis
+from app.config.settings import settings
+
 
 class RateLimitService:
-    def __init__(self, redis: Redis, bucket_size=100, time_period=59) -> None:
+    def __init__(
+        self,
+        redis: Redis,
+        bucket_size: int = settings.DDOS_NUMBER_OF_REQUEST,
+        time_period: int = settings.DDOS_TIME_PERIOD,
+    ) -> None:
         self.redis = redis
         self.bucket_size = bucket_size
         self.time_period = time_period
