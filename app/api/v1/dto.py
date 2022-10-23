@@ -69,6 +69,13 @@ class UserDto:
             "ids": fields.List(fields.Integer(required=True, description="Role id"), required=True),
         },
     )
+    user_permissions_res = ns.model(
+        "User_roles",
+        {
+            "id": fields.Integer(readonly=True, description="Permission id number"),
+            "name": fields.String(required=True, description="Permission name"),
+        },
+    )
 
 
 class RolesDto:

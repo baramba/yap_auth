@@ -6,6 +6,7 @@ from typing import Optional
 from flask_jwt_extended.utils import (
     create_access_token,
     create_refresh_token,
+    decode_token,
     get_jwt_identity,
 )
 from flask_sqlalchemy import SQLAlchemy
@@ -15,11 +16,12 @@ from sqlalchemy.exc import IntegrityError
 from app import db, jwt
 from app.config.settings import settings
 from app.models.history import UsersHistory
+from app.models.permissions import Permissions
 from app.models.roles import Roles
 from app.models.schemas import UserHistory as UserHistorySchema
 from app.models.users import Users
 from app.models.users_roles import UserRoles
-from app.services.auth_decorators import user_has
+from app.services.auth_decorators import get_user_premissions, user_has
 from app.services.base import BaseStorage
 from app.services.redis import get_redis_storage
 from app.services.utils import (
@@ -257,6 +259,10 @@ class UsersService:
             logger.error(e)
             return False
         return True
+
+    def get_user_permissons(self, identity: int) -> list[Permissions]:
+        user_premissions = get_user_premissions(identity)
+        return user_premissions
 
 
 @lru_cache()

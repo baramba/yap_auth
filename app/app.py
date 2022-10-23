@@ -17,6 +17,7 @@ rate_limit = get_ratelimit_service()
 def before_request():
     request_id = request.headers.get("X-Request-Id")
     verify_jwt_in_request(optional=True)
+
     user_id = get_jwt_identity()
     key = user_id or key_from_headers(request)
 
@@ -24,7 +25,7 @@ def before_request():
         abort(429)
 
     # X-Request-ID header must be in request
-    if not request_id:
+    if not request_id and not app.debug:
         raise abort(Response(status=400, response="X-Request-ID header must be in request."))
 
     from opentelemetry import trace
